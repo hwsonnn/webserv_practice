@@ -18,15 +18,17 @@
 int main(int argc, char **argv)
 {
 	int listen_fd, client_fd;
-	socklen_t addrlen;
 	int fd_num;
 	int maxfd = 0;
 	int sockfd;
 	int readn;
 	int i= 0;
 	char buf[MAXLINE];
+
 	fd_set readfds, allfds;
+
 	struct sockaddr_in server_addr, client_addr;
+	socklen_t addrlen;
 
 	if((listen_fd = socket(AF_INET, SOCK_STREAM, 0)) == -1)
 	{
@@ -66,7 +68,7 @@ int main(int argc, char **argv)
 			client_fd = accept(listen_fd,
 					(struct sockaddr *)&client_addr, &addrlen);
 
-			FD_SET(client_fd,&readfds);
+			FD_SET(client_fd, &readfds);
 
 			if (client_fd > maxfd)
 				maxfd = client_fd;
